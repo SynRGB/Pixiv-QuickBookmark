@@ -12,3 +12,7 @@
 ## Description
 
 When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
+
+#### Example
+
+<img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/example-eng.png"/>
