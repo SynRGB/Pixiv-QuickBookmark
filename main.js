@@ -22,6 +22,7 @@
 // @homepageURL       https://github.com/SynRGB/Pixiv-QuickBookmark
 // @contributionURL   https://github.com/SynRGB/Pixiv-QuickBookmark
 // @updateURL         https://github.com/SynRGB/Pixiv-QuickBookmark/releases/new
+// @copyright         Copyright © 2022-PRESENT, TitanRGB (https://github.com/TitanRGB)
 // @charset		    UTF-8
 // @run-at          document-end
 // ==/UserScript==
