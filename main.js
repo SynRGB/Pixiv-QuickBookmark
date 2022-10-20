@@ -3,7 +3,7 @@
 // @name:zh-CN      Pixiv-快捷收藏
 // @name:jpn        Pixiv-クイックブックマーク
 // @namespace       https://github.com/TitanRGB
-// @version         1.0
+// @version         1.1
 // @description         When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 // @description:zh-CN   点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
 // @description:jpn     画像のメインエリアを押すと、ブックマークが追加され、画像ページにジャンプしなくなります。 さらに、画像ページにジャンプするためのボタンを追加します。
@@ -75,14 +75,14 @@ let main = function () {
     }
 }
 
-window.onload = function () {
+unsafeWindow.onload = function () {
     setTimeout(function () {
         main();
-    }, 1500);
+    }, 1000);
 }
-document.body.addEventListener('click', function () {
+document.body.addEventListener('wheel', function () {
     main();
 }, false);
-document.body.addEventListener('wheel', function () {
+unsafeWindow.addEventListener('scroll', function () {
     main();
 }, false);
