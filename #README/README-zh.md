@@ -12,3 +12,7 @@
 ## 简介
 
 点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
+
+#### 示例
+
+<img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/example-zh.png"/>
