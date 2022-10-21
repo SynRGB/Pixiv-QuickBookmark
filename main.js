@@ -3,7 +3,7 @@
 // @name:zh-CN      Pixiv-快捷收藏
 // @name:jpn        Pixiv-クイックブックマーク
 // @namespace       https://github.com/TitanRGB
-// @version         1.2
+// @version         1.3
 // @description         When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 // @description:zh-CN   点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
 // @description:jpn     画像のメインエリアを押すと、ブックマークが追加され、画像ページにジャンプしなくなります。 さらに、画像ページにジャンプするためのボタンを追加します。
@@ -32,7 +32,7 @@ let main = function () {
     for (let i = 0; i < div.length; i++) {
         // use for filter real img div
         let button = div[i].querySelector('button');
-        let a_div_check = div[i].querySelector('div[class="Pixiv-ImgSwopBookmark"]');
+        let a_div_check = div[i].querySelector('div[class="Pixiv-QuickBookmark"]');
         // filter real img div
         if (button !== null && a_div_check === null) {
             // get the parent div of the button
@@ -51,7 +51,7 @@ let main = function () {
             `);
             // add the jump page button to right bottom edge
             let a_div = document.createElement('div');
-            a_div.setAttribute('class', 'Pixiv-ImgSwopBookmark');
+            a_div.setAttribute('class', 'Pixiv-QuickBookmark');
             a_div.setAttribute('style', `
                 content: '';
                 position: absolute;
@@ -82,6 +82,7 @@ let main = function () {
 */
 
 unsafeWindow.onload = function () {
+    console.log("JS script Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");
     // 递归检测用以应对网速较慢的环境
     // 可以确保必要元素都被加载
     let start = function () {
