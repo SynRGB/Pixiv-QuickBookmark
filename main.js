@@ -3,7 +3,7 @@
 // @name:zh-CN      Pixiv-快捷收藏
 // @name:jpn        Pixiv-クイックブックマーク
 // @namespace       https://github.com/TitanRGB
-// @version         1.3
+// @version         2.0
 // @description         When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 // @description:zh-CN   点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
 // @description:jpn     画像のメインエリアを押すと、ブックマークが追加され、画像ページにジャンプしなくなります。 さらに、画像ページにジャンプするためのボタンを追加します。
@@ -32,9 +32,9 @@ let main = function () {
     for (let i = 0; i < div.length; i++) {
         // use for filter real img div
         let button = div[i].querySelector('button');
-        let a_div_check = div[i].querySelector('div[class="Pixiv-QuickBookmark"]');
+        let add_div_check = div[i].querySelector('div[class="Pixiv-QuickBookmark"]');
         // filter real img div
-        if (button !== null && a_div_check === null) {
+        if (button !== null && add_div_check === null) {
             // get the parent div of the button
             let buttonInnerDiv = button.parentNode;
             let buttonOuterDiv = button.parentNode.parentNode;
@@ -50,9 +50,9 @@ let main = function () {
                 left: -${divWidth - 32}px;
             `);
             // add the jump page button to right bottom edge
-            let a_div = document.createElement('div');
-            a_div.setAttribute('class', 'Pixiv-QuickBookmark');
-            a_div.setAttribute('style', `
+            let add_div = document.createElement('div');
+            add_div.setAttribute('class', 'Pixiv-QuickBookmark');
+            add_div.setAttribute('style', `
                 content: '';
                 position: absolute;
                 right: 0;
@@ -61,13 +61,13 @@ let main = function () {
                 border-top-color: transparent;
                 border-left-color: transparent;
             `);
-            a_div.addEventListener('click', function () {
+            add_div.addEventListener('click', function () {
                 let a = div[i].querySelector('a');
-                unsafeWindow.location.href = a.getAttribute('href');
+                a.click();
             });
-            div[i].appendChild(a_div);
+            div[i].appendChild(add_div);
             // modify the jump page area to bookmark button
-            div[i].querySelector('a').addEventListener('click', function (e) {
+            div[i].querySelector('a').childNodes[0].addEventListener('click', function (e) {
                 e.preventDefault();
                 button.click();
             });
@@ -75,79 +75,16 @@ let main = function () {
     }
 }
 
-/*
-********** 注 **********
-* 因为 Pixiv 的前端是纯动态加载的, 且经常网络不佳
-* 所以用了一些比较暴力的方法来确保必要元素都被加载
-*/
+// if DOM changed, re-run the script
+let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+let observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function () {
+        main();
+    });
+});
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
 
-unsafeWindow.onload = function () {
-    console.log("JS script Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");
-    // 递归检测用以应对网速较慢的环境
-    // 可以确保必要元素都被加载
-    let start = function () {
-        if (document.querySelectorAll('div[type="illust"]').length > 0) {
-            main();
-        } else {
-            setTimeout(start, 1000);
-        }
-    }
-    start();
-}
-// 用于绑定滞后加载的横向浏览框
-let wheelCount = 0;
-// 绑定鼠标滚轮滚动
-document.body.addEventListener('wheel', function () {
-    main();
-    // 等待滚轮滚动以确保加载完毕
-    if (wheelCount === 3) {
-        // 绑定在页面中下段的横向浏览框
-        let button_left = document.querySelectorAll('button[style*="left"]');
-        for (let i = 0; i < button_left.length; i++) {
-            if (button_left[i].style.left === '-72px') {
-                button_left[i].addEventListener('click', function () {
-                    // 迟滞用于等待新组建加载
-                    setTimeout(function () {
-                        main();
-                    }, 300);
-                });
-            }
-        }
-        let button_right = document.querySelectorAll('button[style*="right"]');
-        for (let i = 0; i < button_right.length; i++) {
-            if (button_right[i].style.right === '-72px') {
-                button_right[i].addEventListener('click', function () {
-                    // 迟滞用于等待新组建加载
-                    setTimeout(function () {
-                        main();
-                    }, 300);
-                });
-            }
-        }
-        // 绑定作品页中的作者作品横向浏览框
-        let authorWorkButton1_xPath = "//*[@id=\"root\"]/div[2]/div/div[2]/div/div[1]/main/section/div[2]/div[1]/div/div[2]/nav/div[2]/button[1]";
-        let authorWorkButton1 = document.evaluate(authorWorkButton1_xPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        authorWorkButton1.addEventListener('click', function () {
-            // 迟滞用于等待新组建加载
-            setTimeout(function () {
-                main();
-            }, 300);
-        }, false);
-        let authorWorkButton2_xPath = "//*[@id=\"root\"]/div[2]/div/div[2]/div/div[1]/main/section/div[2]/div[1]/div/div[2]/nav/div[2]/button[2]";
-        let authorWorkButton2 = document.evaluate(authorWorkButton2_xPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        authorWorkButton2.addEventListener('click', function () {
-            // 迟滞用于等待新组建加载
-            setTimeout(function () {
-                main();
-            }, 300);
-        }, false);
-        // 不再执行
-        wheelCount++;
-    } else {
-        wheelCount++;
-    }
-}, false);
-// 绑定页面竖向滚动条的拖动
-unsafeWindow.addEventListener('scroll', function () {
-    main();
-}, false);
+console.log("JS script Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");

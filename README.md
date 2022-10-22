@@ -13,6 +13,11 @@
 
 When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 
-#### Example
+### What's new in `v2`
+
+- Solve the issue that artwork page always force jump to new page when click jump button, while it supposed to partly refresh
+- Improved trigger logic to greatly optimize performance
+
+### Example
 
 <img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/example-eng.png"/>
