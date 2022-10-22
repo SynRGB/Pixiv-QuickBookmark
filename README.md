@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/icon/256.png" width="20%"/>
-    <h1>Pixiv-QuickBookmark <code>v1.3</code></h1>
+    <h1>Pixiv-QuickBookmark <code>v2.0</code></h1>
 	<p>
         <a href='https://github.com/SynRGB/Pixiv-QuickBookmark'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
 	    <a href='https://greasyfork.org/en/scripts/453417-pixiv-quickbookmark'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
