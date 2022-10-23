@@ -6,7 +6,7 @@
 	    <a href='https://greasyfork.org/zh-CN/scripts/453417-pixiv-quickbookmark'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
         <a href='https://openuserjs.org/scripts/TitanRGB/Pixiv-QuickBookmark'><img src="https://img.shields.io/badge/-OpenUserJS-004796?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="OpenUserJS"></a>
     </p>
-	<p><a href='https://github.com/SynRGB/Pixiv-QuickBookmark/blob/main/README.md'>English</a> | 简体中文 | <a href="https://github.com/SynRGB/Pixiv-QuickBookmark/blob/main/%23README/README-jp.md">日本語</a></p>
+	<p><a href='https://github.com/SynRGB/Pixiv-QuickBookmark/blob/main/README.md'>English</a> | 简体中文 | <a href="https://github.com/SynRGB/Pixiv-QuickBookmark/blob/main/%23README/README-ja.md">日本語</a></p>
 </div>
 
 ## 简介
