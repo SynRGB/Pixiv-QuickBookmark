@@ -3,7 +3,7 @@
 // @name:zh-CN          Pixiv-快捷收藏
 // @name:ja             Pixiv-クイックブックマーク
 // @namespace           https://github.com/TitanRGB
-// @version             2.2
+// @version             2.3
 // @description         When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 // @description:zh-CN   点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
 // @description:ja      画像のメインエリアを押すと、ブックマークが追加され、画像ページにジャンプしなくなります。 さらに、画像ページにジャンプするためのボタンを追加します。
@@ -86,22 +86,21 @@ window.onload = function () {
         }
     }
     run();
-}
-
-// if DOM changed, re-run the script
-let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-let observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function () {
-        // 通过增加时间间隔来避免无限回调
-        if (new Date().getTime() - last_run_time > 20) {
-            main();
-            // console.log('Pixiv-QuickBookmark: DOM changed');
-        }
+    // if DOM changed, re-run the script
+    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+    let observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function () {
+            // 通过增加时间间隔来避免无限回调
+            if (new Date().getTime() - last_run_time > 100) {
+                main();
+                // console.log('Pixiv-QuickBookmark: DOM changed');
+            }
+        });
     });
-});
-observer.observe(document.querySelector("div[id='root']"), {
-    childList: true,
-    subtree: true
-});
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
 
 console.log("JS script Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");
