@@ -93,8 +93,7 @@ let observer = new MutationObserver(function (mutations) {
     mutations.forEach(function () {
         // 通过增加时间间隔来避免无限回调
         if (new Date().getTime() - last_run_time > 100) {
-            main();
-            // console.log('Pixiv-QuickBookmark: DOM changed');
+            setTimeout(main, 500);
         }
     });
 });
