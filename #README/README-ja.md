@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/icon/256.png" width="20%"/>
-    <h1>Pixiv-クイックブックマーク <code>v2.1</code></h1>
+    <h1>Pixiv-クイックブックマーク <code>v2.2</code></h1>
 	<p>
         <a href='https://github.com/SynRGB/Pixiv-QuickBookmark'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
 	    <a href='https://greasyfork.org/zh-CN/scripts/453417-pixiv-quickbookmark'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
@@ -15,10 +15,11 @@
 
 画像のメイン領域をクリックすると、画像ページに遷移するのではなく、直接画像をお気に入りにします。画像ページに遷移するボタンが追加されます。
 
-### `v2` 説明を更新する
+### 説明を更新する
 
-- 作品ページのトランジションボタンをクリックすると、常に強制的に新しいページに遷移してしまう問題が解決されました。現在は元のバージョンと同様に局所的に更新されます。
-- トリガーのロジックを最適化し、性能を大幅に向上させました。
+- `v2.2` フリップフロップのロジックをさらに改良し、性能を劇的に最適化した。
+- `v2` 作品ページのトランジションボタンをクリックすると、常に強制的に新しいページに遷移してしまう問題が解決されました。現在は元のバージョンと同様に局所的に更新されます。
+- `v2` トリガーのロジックを最適化し、性能を大幅に向上させました。
 
 ### 事例
 

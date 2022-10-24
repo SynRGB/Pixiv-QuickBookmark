@@ -3,7 +3,7 @@
 // @name:zh-CN          Pixiv-快捷收藏
 // @name:ja             Pixiv-クイックブックマーク
 // @namespace           https://github.com/TitanRGB
-// @version             2.1
+// @version             2.2
 // @description         When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 // @description:zh-CN   点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
 // @description:ja      画像のメインエリアを押すと、ブックマークが追加され、画像ページにジャンプしなくなります。 さらに、画像ページにジャンプするためのボタンを追加します。
@@ -25,7 +25,10 @@
 // @run-at              document-end
 // ==/UserScript==
 
+let last_run_time = new Date().getTime();
+
 let main = function () {
+    // console.log('Pixiv-QuickBookmark: main.js');
     let div = document.querySelectorAll('div[type="illust"]');
     for (let i = 0; i < div.length; i++) {
         // use for filter real img div
@@ -71,16 +74,32 @@ let main = function () {
             });
         }
     }
+    last_run_time = new Date().getTime();
+}
+
+window.onload = function () {
+    let run = function () {
+        if (document.querySelectorAll('div[type="illust"]').length > 0) {
+            main();
+        } else {
+            setTimeout(run, 500);
+        }
+    }
+    run();
 }
 
 // if DOM changed, re-run the script
 let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 let observer = new MutationObserver(function (mutations) {
     mutations.forEach(function () {
-        main();
+        // 通过增加时间间隔来避免无限回调
+        if (new Date().getTime() - last_run_time > 10) {
+            main();
+            // console.log('Pixiv-QuickBookmark: DOM changed');
+        }
     });
 });
-observer.observe(document.body, {
+observer.observe(document.querySelector("div[id='root']"), {
     childList: true,
     subtree: true
 });
