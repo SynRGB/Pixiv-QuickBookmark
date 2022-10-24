@@ -77,16 +77,6 @@ let main = function () {
     last_run_time = new Date().getTime();
 }
 
-let run = function () {
-    let ifArtwork = document.querySelectorAll('div[type="illust"]').length > 0;
-    let timeMoreThan1min = new Date().getTime() - last_run_time > 60000;
-    if (ifArtwork || timeMoreThan1min) {
-        main();
-    } else {
-        setTimeout(run, 500);
-    }
-}
-run();
 // if DOM changed, re-run the script
 let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 let observer = new MutationObserver(function (mutations) {
