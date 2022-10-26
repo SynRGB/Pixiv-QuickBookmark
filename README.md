@@ -24,3 +24,9 @@ When press the main area of the image, it will add the bookmark instead of jump 
 ### Example
 
 <img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/example-eng.png"/>
+<!--
+## Pixiv-QuickBookmark `v2.6`
+- Fixed concurrency bugs
+- 修复了并发漏洞
+- コンカレント・ホールを修正しました
+-->
