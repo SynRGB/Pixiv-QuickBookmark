@@ -15,6 +15,7 @@ When press the main area of the image, it will add the bookmark instead of jump 
 
 ### What is new
 
+- `v2.6` Fixed concurrency bugs
 - `v2.4` Further optimize the operation efficiency
 - `v2.2` Further optimize the operation efficiency
 - `v2` Solve the issue that artwork page always force jump to new page when click jump button, while it supposed to partly refresh
