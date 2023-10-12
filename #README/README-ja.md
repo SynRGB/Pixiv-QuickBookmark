@@ -25,4 +25,4 @@
 
 ### 事例
 
-<img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/example-zh.png"/>
+<img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/example-eng.png"/>
