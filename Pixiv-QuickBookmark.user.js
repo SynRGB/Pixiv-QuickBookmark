@@ -27,19 +27,70 @@
 let last_run_time = new Date().getTime();
 
 let main = function () {
-    // console.log('Pixiv-QuickBookmark: main.js');
-    let div = document.querySelectorAll('div[type="illust"]');
-    for (let i = 0; i < div.length; i++) {
-        // use for filter real img div
-        let button = div[i].querySelector('button');
-        let add_div_check = div[i].querySelector('div[class="Pixiv-QuickBookmark"]');
+    // pixiv.net/users/* 页面下特有的顶部精选图片，唯一内部dom结构不同的
+    // the top featured images on pixiv.net/users/*, only theses have different internal dom structure
+    let userFeatured_Imgs = document.querySelectorAll('div[radius="8"]');
+    // 其他所有图片，内部的dom结构都一样
+    // all other images, the internal dom structure is the same
+    let allOther_Imgs = document.querySelectorAll('div[type="illust"]');
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // 遍历 userFeatured_Imgs
+    for (let i = 0; i < userFeatured_Imgs.length; i++) {
+        let div = userFeatured_Imgs[i].parentNode.parentNode;
+        let button = div.querySelector('button');
+        // 避免重复添加
+        // avoid duplicate modification
+        let added_check = div.querySelector('div[class="Pixiv-QuickBookmark"]');
         // filter real img div
-        if (button !== null && add_div_check === null) {
+        if (button !== null && added_check === null) {
+            // get the parent div of the button
+            let buttonDiv = button.parentNode;
+            // move button to left side
+            let divWidth = div.clientWidth;
+            buttonDiv.setAttribute('style', `
+                position: absolute;
+                width: ${divWidth}px;
+                bottom: 0;
+            `);
+            // add the jump page button to right bottom edge
+            let divToAdd_newJumpButton = document.createElement('div');
+            divToAdd_newJumpButton.setAttribute('class', 'Pixiv-QuickBookmark');
+            divToAdd_newJumpButton.setAttribute('style', `
+                content: '';
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                border: 17px solid #0096FA;
+                border-top-color: transparent;
+                border-left-color: transparent;
+            `);
+            divToAdd_newJumpButton.addEventListener('click', function () {
+                let a = div.querySelector('a');
+                a.click();
+            });
+            div.appendChild(divToAdd_newJumpButton);
+            // modify the jump page area to bookmark button
+            div.querySelector('a').childNodes[0].addEventListener('click', function (e) {
+                e.preventDefault();
+                button.click();
+            });
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // 遍历 allOther_Imgs
+    for (let i = 0; i < allOther_Imgs.length; i++) {
+        // use for filter real img div
+        let button = allOther_Imgs[i].querySelector('button');
+        // 避免重复添加
+        // avoid duplicate modification
+        let added_check = allOther_Imgs[i].querySelector('div[class="Pixiv-QuickBookmark"]');
+        // filter real img div
+        if (button !== null && added_check === null) {
             // get the parent div of the button
             let buttonInnerDiv = button.parentNode;
             let buttonOuterDiv = button.parentNode.parentNode;
             // move button to left side
-            let divWidth = div[i].clientWidth;
+            let divWidth = allOther_Imgs[i].clientWidth;
             buttonOuterDiv.setAttribute('style', `
                 position: absolute;
                 width: ${divWidth}px;
@@ -50,9 +101,9 @@ let main = function () {
                 left: -${divWidth - 32}px;
             `);
             // add the jump page button to right bottom edge
-            let add_div = document.createElement('div');
-            add_div.setAttribute('class', 'Pixiv-QuickBookmark');
-            add_div.setAttribute('style', `
+            let divToAdd_newJumpButton = document.createElement('div');
+            divToAdd_newJumpButton.setAttribute('class', 'Pixiv-QuickBookmark');
+            divToAdd_newJumpButton.setAttribute('style', `
                 content: '';
                 position: absolute;
                 right: 0;
@@ -61,67 +112,16 @@ let main = function () {
                 border-top-color: transparent;
                 border-left-color: transparent;
             `);
-            add_div.addEventListener('click', function () {
-                let a = div[i].querySelector('a');
+            divToAdd_newJumpButton.addEventListener('click', function () {
+                let a = allOther_Imgs[i].querySelector('a');
                 a.click();
             });
-            div[i].appendChild(add_div);
+            allOther_Imgs[i].appendChild(divToAdd_newJumpButton);
             // modify the jump page area to bookmark button
-            div[i].querySelector('a').childNodes[0].addEventListener('click', function (e) {
+            allOther_Imgs[i].querySelector('a').childNodes[0].addEventListener('click', function (e) {
                 e.preventDefault();
                 button.click();
             });
-        }
-    }
-    // if (false) {
-    if (window.location.href.match(/https:\/\/www\.pixiv\.net\/users\/\d+/)) {
-        let xpath = '//*[@id="root"]/div[2]/div/div[3]/div/div/div[2]/div[3]/section';
-        let section = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        let li = section.querySelectorAll('li');
-        for (let i = 0; i < li.length; i++) {
-            let top_div = li[i].querySelector('div:nth-child(2) > div:nth-child(1) > div:nth-child(1)');
-            // use for filter real img div
-            let button = top_div.querySelector('button');
-            let add_div_check = top_div.parentNode.querySelector('div[class="Pixiv-QuickBookmark"]');
-            // filter real img div
-            if (button !== null && add_div_check === null) {
-                // get the parent div of the button
-                let buttonInnerDiv = button.parentNode;
-                let buttonOuterDiv = button.parentNode.parentNode;
-                // move button to left side
-                let divWidth = top_div.clientWidth;
-                buttonOuterDiv.setAttribute('style', `
-                position: absolute;
-                width: ${divWidth}px;
-                bottom: 0;
-            `);
-                buttonInnerDiv.setAttribute('style', `
-                position: relative;
-                left: -${divWidth - 32}px;
-            `);
-                // add the jump page button to right bottom edge
-                let add_div = document.createElement('div');
-                add_div.setAttribute('class', 'Pixiv-QuickBookmark');
-                add_div.setAttribute('style', `
-                content: '';
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                border: 17px solid #0096FA;
-                border-top-color: transparent;
-                border-left-color: transparent;
-            `);
-                add_div.addEventListener('click', function () {
-                    let a = top_div.querySelector('a');
-                    a.click();
-                });
-                top_div.parentNode.appendChild(add_div);
-                // modify the jump page area to bookmark button
-                top_div.querySelector('a').childNodes[0].addEventListener('click', function (e) {
-                    e.preventDefault();
-                    button.click();
-                });
-            }
         }
     }
     last_run_time = new Date().getTime();
@@ -142,4 +142,4 @@ observer.observe(document.body, {
     subtree: true
 });
 
-console.log("JS script Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");
+console.log("Userscript Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");
