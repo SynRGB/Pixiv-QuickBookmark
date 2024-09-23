@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/SynRGB/Pixiv-QuickBookmark/raw/main/%23README/icon/256.png" width="20%"/>
-    <h1>Pixiv-クイックブックマーク <code>v2.8</code></h1>
+    <h1>Pixiv-クイックブックマーク <code>v2.9</code></h1>
 	<p>
         <a href='https://github.com/SynRGB/Pixiv-QuickBookmark'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
 	    <a href='https://greasyfork.org/zh-CN/scripts/453417-pixiv-quickbookmark'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
@@ -14,14 +14,6 @@
 ## 简介
 
 画像のメイン領域をクリックすると、画像ページに遷移するのではなく、直接画像をお気に入りにします。画像ページに遷移するボタンが追加されます。
-
-### 説明を更新する
-
-- `v2.6` コンカレント・ホールを修正しました
-- `v2.4` 運行効率をさらに最適化する
-- `v2.2` 運行効率をさらに最適化する
-- `v2` 作品ページのトランジションボタンをクリックすると、常に強制的に新しいページに遷移してしまう問題が解決されました。現在は元のバージョンと同様に局所的に更新されます。
-- `v2` 運行効率を最適化する
 
 ### 事例
 
