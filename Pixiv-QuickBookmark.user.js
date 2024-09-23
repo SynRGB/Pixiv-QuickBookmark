@@ -3,7 +3,7 @@
 // @name:zh-CN          Pixiv-快捷收藏
 // @name:ja             Pixiv-クイックブックマーク
 // @namespace           https://github.com/Mehver
-// @version             2.8
+// @version             2.9
 // @description         When press the main area of the image, it will add the bookmark instead of jump to the image page. And add a button to jump to the image page.
 // @description:zh-CN   点击图片主区域，会直接收藏图片，而不是跳转到图片页面。并额外添加一个按钮用于跳转到图片页面。
 // @description:ja      画像のメインエリアを押すと、ブックマークが追加され、画像ページにジャンプしなくなります。 さらに、画像ページにジャンプするためのボタンを追加します。
@@ -32,11 +32,12 @@ let main = function () {
     let userFeatured_Imgs = document.querySelectorAll('div[radius="8"]');
     // 其他所有图片，内部的dom结构都一样
     // all other images, the internal dom structure is the same
-    let allOther_Imgs = document.querySelectorAll('div[type="illust"]');
+    let allOther_Imgs = document.querySelectorAll('div[radius="4"]');
     /////////////////////////////////////////////////////////////////////////////////////////
     // 遍历 userFeatured_Imgs
     for (let i = 0; i < userFeatured_Imgs.length; i++) {
-        let div = userFeatured_Imgs[i].parentNode.parentNode;
+        // let div = userFeatured_Imgs[i].parentNode.parentNode;
+        let div = userFeatured_Imgs[i].parentNode.parentNode.parentNode;
         let button = div.querySelector('button');
         // 避免重复添加
         // avoid duplicate modification
@@ -79,18 +80,19 @@ let main = function () {
     /////////////////////////////////////////////////////////////////////////////////////////
     // 遍历 allOther_Imgs
     for (let i = 0; i < allOther_Imgs.length; i++) {
+        let div = allOther_Imgs[i].parentNode.parentNode.parentNode;
         // use for filter real img div
-        let button = allOther_Imgs[i].querySelector('button');
+        let button = div.querySelector('button');
         // 避免重复添加
         // avoid duplicate modification
-        let added_check = allOther_Imgs[i].querySelector('div[class="Pixiv-QuickBookmark"]');
+        let added_check = div.querySelector('div[class="Pixiv-QuickBookmark"]');
         // filter real img div
         if (button !== null && added_check === null) {
             // get the parent div of the button
             let buttonInnerDiv = button.parentNode;
             let buttonOuterDiv = button.parentNode.parentNode;
             // move button to left side
-            let divWidth = allOther_Imgs[i].clientWidth;
+            let divWidth = div.clientWidth;
             buttonOuterDiv.setAttribute('style', `
                 position: absolute;
                 width: ${divWidth}px;
@@ -113,12 +115,12 @@ let main = function () {
                 border-left-color: transparent;
             `);
             divToAdd_newJumpButton.addEventListener('click', function () {
-                let a = allOther_Imgs[i].querySelector('a');
+                let a = div.querySelector('a');
                 a.click();
             });
-            allOther_Imgs[i].appendChild(divToAdd_newJumpButton);
+            div.appendChild(divToAdd_newJumpButton);
             // modify the jump page area to bookmark button
-            allOther_Imgs[i].querySelector('a').childNodes[0].addEventListener('click', function (e) {
+            div.querySelector('a').childNodes[0].addEventListener('click', function (e) {
                 e.preventDefault();
                 button.click();
             });
