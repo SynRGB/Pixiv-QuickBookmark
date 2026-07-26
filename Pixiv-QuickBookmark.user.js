@@ -16,10 +16,10 @@
 // @license             MPL-2.0
 // @license^            Mozilla Public License 2.0
 // @grant               unsafeWindow
-// @homepageURL         https://github.com/SynRGB/Pixiv-QuickBookmark
-// @contributionURL     https://github.com/SynRGB/Pixiv-QuickBookmark
-// @updateURL           https://github.com/SynRGB/Pixiv-QuickBookmark/releases/new
-// @copyright           Copyright © 2022-PRESENT, Mehver (https://github.com/Mehver)
+// @homepageURL         https://github.com/MehverSynRGB/Pixiv-QuickBookmark
+// @contributionURL     https://github.com/MehverSynRGB/Pixiv-QuickBookmark
+// @updateURL           https://github.com/MehverSynRGB/Pixiv-QuickBookmark/releases/new
+// @copyright           Copyright (c) 2022 Mehver (https://github.com/Mehver). All rights reserved.
 // @charset		        UTF-8
 // @run-at              document-end
 // ==/UserScript==
@@ -144,4 +144,4 @@ observer.observe(document.body, {
     subtree: true
 });
 
-console.log("Userscript Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/SynRGB/Pixiv-QuickBookmark");
+console.log("Userscript Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/MehverSynRGB/Pixiv-QuickBookmark");
