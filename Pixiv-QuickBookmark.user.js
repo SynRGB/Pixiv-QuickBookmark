@@ -144,4 +144,4 @@ observer.observe(document.body, {
     subtree: true
 });
 
-console.log("Userscript Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded. See more details at https://github.com/MehverSynRGB/Pixiv-QuickBookmark");
+console.log("Script Pixiv-QuickBookmark (Pixiv-快捷收藏) loaded successfully. https://github.com/MehverSynRGB/Pixiv-QuickBookmark");
